@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:13:18 by mario             #+#    #+#             */
-/*   Updated: 2026/01/22 11:31:04 by mario            ###   ########.fr       */
+/*   Updated: 2026/01/22 22:22:33 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 typedef struct s_philo
 {
 	int index;
-	ptheread_t index;
-	pthread_mutex fork;
+	pthread_t index;
+	pthread_mutex_t fork;
 	int	 nbr_eats;
 	long last_meals;
 }t_philo;
