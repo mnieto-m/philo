@@ -6,13 +6,14 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:13:18 by mario             #+#    #+#             */
-/*   Updated: 2026/01/22 22:22:33 by mario            ###   ########.fr       */
+/*   Updated: 2026/01/23 00:12:01 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include "../Libft/include/libft.h"
 # include <limits.h>
 # include <string.h>
 # include <stdio.h>
@@ -29,14 +30,17 @@
 # define THINK	"is thinking"
 # define DIE	"died"
 
+struct s_data;
+
 typedef struct s_philo
 {
-	int index;
-	pthread_t index;
-	pthread_mutex_t fork;
-	int	 nbr_eats;
-	long last_meals;
-}t_philo;
+	struct s_data	*data;
+	int				index;
+	pthread_t		thread;
+	pthread_mutex_t	fork;
+	int				nbr_eats;
+	long			last_meal;
+}	t_philo;
 
 typedef struct s_data
 {
@@ -51,5 +55,13 @@ typedef struct s_data
 	pthread_mutex_t	shared;
 	int				exit_flag;
 }	t_data;
+
+
+int	init_struct(t_data *data);
+int parsing(char **argv, int argc, t_data *data);
+int control_philo(t_data *data);
+
+
+int error_node(t_philo *philo, t_data *data);
 
 #endif
