@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:13:18 by mario             #+#    #+#             */
-/*   Updated: 2026/01/23 00:12:01 by mario            ###   ########.fr       */
+/*   Updated: 2026/01/25 20:14:46 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int parsing(char **argv, int argc, t_data *data);
 int control_philo(t_data *data);
 
 
-int error_node(t_philo *philo, t_data *data);
+int error_node(t_philo *philo, t_data **data);
 
 #endif

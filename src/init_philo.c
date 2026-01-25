@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:37:43 by mario             #+#    #+#             */
-/*   Updated: 2026/01/23 00:07:29 by mario            ###   ########.fr       */
+/*   Updated: 2026/01/25 20:13:05 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	init_struct(t_data *data)
 		}
 		new_node = ft_lstnew(philo);
 		if (!new_node)
-			error_node(philo, &data);
+			error_node(philo, &data->philos);
 		ft_lstadd_back(&data->philos, new_node);
 		if (i == data->nbr_philos)
 			last = new_node;
