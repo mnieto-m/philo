@@ -32,18 +32,6 @@ static void	free_philo(void *content)
 		free(content);
 }
 
-static void	clear_circular_list(t_list **lst)
-{
-	t_list	*tmp;
-	t_list	*head;
-
-	if (!lst || !(*lst))
-		return ;
-	head = *lst;
-	(*lst)->next = NULL;
-	ft_lstclear(lst, free_philo);
-}
-
 int	init_struct(t_data *data)
 {
 	int		i;
@@ -58,7 +46,7 @@ int	init_struct(t_data *data)
 		if (!philo)
 		{
 			ft_putstr_fd("Error creating philo\n", 2);
-			clear_circular_list(&data->philos);
+			ft_lstclear(&data->philos, free_philo);
 			return (1);
 		}
 		new_node = ft_lstnew(philo);
