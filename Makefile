@@ -3,7 +3,7 @@ NAME = ./philo
 # Var
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread #-pthread
 RM = rm
 RMFLAGS = -rf
 MKDIR = mkdir -p
@@ -27,7 +27,8 @@ FILES = main\
 		threads\
 		error\
 		routines\
-		speak
+		print\
+		checker
 
 
 # Files add

@@ -35,7 +35,7 @@ int init_argv(char *argv[], int argc, t_data *data)
 		return(1);
 	if(argc == 6)
 	{
-		data->nbr_philos = ft_atoi_signal(argv[1],&flag);
+		data->nbr_must_eat = ft_atoi_signal(argv[5],&flag);
 		if(flag == -1)
 			return(1);
 	}
