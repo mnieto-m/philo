@@ -3,7 +3,7 @@ NAME = ./philo
 # Var
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread #-pthread
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread -pthread
 RM = rm
 RMFLAGS = -rf
 MKDIR = mkdir -p

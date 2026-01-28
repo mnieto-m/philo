@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 01:33:11 by mario             #+#    #+#             */
-/*   Updated: 2026/01/26 14:32:08 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2026/01/28 16:42:59 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ static int	take_forks(t_philo *philo)
 {
 	t_philo	*next_philo;
 
-	if (philo->data->nbr_philos == 1)
-	{
-		pthread_mutex_lock(&philo->fork);
-		speak(FORK, philo->data->start_time, philo, 0);
-		return (0);
-	}
 	next_philo = get_next_philo(philo);
 	if(philo->index % 2 == 0)
 	{
@@ -35,6 +29,11 @@ static int	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(&next_philo->fork);
 		speak(FORK, philo->data->start_time, philo, 0);
+		if (philo->data->nbr_philos == 1)
+		{
+			pthread_mutex_unlock(&next_philo->fork);
+			return (1);
+		}
 		pthread_mutex_lock(&philo->fork);
 		speak(FORK, philo->data->start_time, philo, 0);
 	}
@@ -47,21 +46,14 @@ static int	eat(t_philo *philo)
 
 	if (take_forks(philo))
 		return (1);
+	next_philo = get_next_philo(philo);
 	pthread_mutex_lock(&philo->data->shared);
 	philo->last_meal = get_time_in_milliseconds();
 	philo->nbr_eats++;
 	pthread_mutex_unlock(&philo->data->shared);
 	speak(EAT, philo->data->start_time, philo, philo->data->t_eat);
-	if (philo->data->nbr_philos == 1)
-	{
-		pthread_mutex_unlock(&philo->fork);
-	}
-	else
-	{
-		next_philo = get_next_philo(philo);
-		pthread_mutex_unlock(&philo->fork);
-		pthread_mutex_unlock(&next_philo->fork);
-	}
+	pthread_mutex_unlock(&philo->fork);
+	pthread_mutex_unlock(&next_philo->fork);
 	pthread_mutex_lock(&philo->data->shared);
 	if (philo->nbr_eats == philo->data->nbr_must_eat)
 	{
