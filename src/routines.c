@@ -6,19 +6,18 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 01:33:11 by mario             #+#    #+#             */
-/*   Updated: 2026/01/28 16:42:59 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:50:11 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
 
 static int	take_forks(t_philo *philo)
 {
 	t_philo	*next_philo;
 
 	next_philo = get_next_philo(philo);
-	if(philo->index % 2 == 0)
+	if (philo->index % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->fork);
 		speak(FORK, philo->data->start_time, philo, 0);
@@ -86,11 +85,10 @@ static long	t_think(t_philo *philo)
 	return (think_time);
 }
 
-
 void	*routine(void *arg)
 {
-	t_philo		*philo;
-	long		think_time;
+	t_philo	*philo;
+	long	think_time;
 
 	philo = (t_philo *)arg;
 	think_time = t_think(philo);

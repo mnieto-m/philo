@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 00:01:38 by mario             #+#    #+#             */
-/*   Updated: 2026/01/25 20:10:51 by mario            ###   ########.fr       */
+/*   Updated: 2026/01/29 00:31:03 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cleanup_data(t_data *data)
 	pthread_mutex_destroy(&data->shared);
 }
 
-int error_node(t_philo *philo, t_list **lst)
+int	error_node(t_philo *philo, t_list **lst)
 {
 	ft_putstr_fd("Error creating list\n", 2);
 	free(philo);

@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 13:41:13 by mnieto-m          #+#    #+#             */
-/*   Updated: 2026/01/26 14:05:33 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2026/01/29 00:47:12 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,18 @@ static int	check_must_eat(t_philo *philo)
 	return (0);
 }
 
+static void	checker_routine_mutex(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->data->shared);
+	speak(DIE, philo->data->start_time, philo, 0);
+	pthread_mutex_lock(&philo->data->shared);
+}
+
 void	*checker_routine(void *arg)
 {
-	t_philo		*philo;
-	long		e_time;
-	t_list		*first;
+	t_philo	*philo;
+	long	e_time;
+	t_list	*first;
 
 	first = (t_list *)arg;
 	philo = (t_philo *)first->content;
@@ -66,11 +73,7 @@ void	*checker_routine(void *arg)
 			pthread_mutex_lock(&philo->data->shared);
 			philo->data->exit_flag = 1;
 			if (philo->nbr_eats != philo->data->nbr_must_eat)
-			{
-				pthread_mutex_unlock(&philo->data->shared);
-				speak(DIE, philo->data->start_time, philo, 0);
-				pthread_mutex_lock(&philo->data->shared);
-			}
+				checker_routine_mutex(philo);
 			pthread_mutex_unlock(&philo->data->shared);
 			break ;
 		}
